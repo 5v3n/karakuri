@@ -7,9 +7,9 @@ require 'test/unit'
 require 'serious_blog_helper'
 
 class SeriousBlogHelperTest < Test::Unit::TestCase
+  # TODO implement proper tests!
   def test_tags_from_article
-    helper = SeriousBlogHelper.new
-    result = helper.tags_from_article(nil)
+    result = SeriousBlogHelper::tags_from_article(nil)
     assert("nil should lead to nil in the result", result == nil)
   end
 end
