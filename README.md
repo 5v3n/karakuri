@@ -30,7 +30,7 @@ For example, to use seo friendly titles, your layout.rhtml should be looking lik
     <html>
       <head>
         <% require 'blog_helper'
-           page_title = BlogHelper::generate_title(@path, title, 'yourSitesTitle.com')
+           page_title = BlogHelper::seo_friendly_title(@path, title, 'yourSitesTitle.com')
         %>
     .
     .
