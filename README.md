@@ -25,7 +25,8 @@ Piece of cake, again: all you have to do is use `<% require 'blog_helper'%>` in 
 
 For example, to use seo friendly titles, your layout.rhtml should be looking like this:
 
-`<!doctype html>
+`
+<!doctype html>
 <html>
   <head>
     <% require 'blog_helper'
