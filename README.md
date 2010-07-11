@@ -23,6 +23,7 @@ Please follow the instrucions there to do so.
 
 Piece of cake, again: all you have to do is use `<% require 'blog_helper'%>` in your .rhtml or .erb file and call the corresponding methods.
 
+### SEO friendly titles
 For example, to use seo friendly titles, your layout.rhtml should be looking like this:
 
 
@@ -40,3 +41,68 @@ For example, to use seo friendly titles, your layout.rhtml should be looking lik
     .
     .
     .
+### Tags
+Adding the tagging feature requires the _toto_prerelease_ as mentioned above, since we need the http request to apply our little hack.
+
+To add a list of tags to your article, just use a custom yaml attribute:
+
+    title: The Wonderful Wizard of Oz
+   *tags: hacks, love, rock 'n' roll*
+    author: Lyman Frank Baum
+    date: 1900/05/17
+
+    Dorothy lived in the midst of the great Kansas prairies, with Uncle Henry,
+    who was a farmer, and Aunt Em, who was the farmer's wife.
+
+Next, you need a place to show the tag links, for example the index.rhtml:
+
+    <section id="articles">
+      <% require 'blog_helper' %>
+      <% for article in articles[0...10] %>
+        <article class="post">
+          <header>
+            <h1><a href="<%= article.path %>"><%= article.title %></a></h1>
+            <span class="descr"><%= article.date %></span><% 10.times { %>&nbsp;<%}%>
+            <span class="tags">*<%= BlogHelper::tag_link_list(article[:tags])  %>*</span><% 10.times { %>&nbsp;<%}%>
+
+
+
+And again: piece of caked ;-). Now all we need to add is a page that displays articles belonging to a ceratin tag:
+
+Create a page called `tagged.rhtml` in your `templates/pages` directory that looks like this:
+
+    <%#
+    # search given tags...
+    %>
+
+    <%
+     require 'cgi'
+     require 'blog_helper'
+
+     desired_tag = env["QUERY_STRING"]
+       if desired_tag
+         start = desired_tag.index("=")
+         stop = desired_tag.index("&")
+         stop = 0 unless stop
+         desired_tag = desired_tag[start+1..stop-1]
+         desired_tag = CGI::unescape(desired_tag)
+       end
+
+    %>
+    <h1>Posts filed under '<%= desired_tag %>': </h1>
+    <ul>
+
+    <% @articles.select do |a|
+      tags = BlogHelper::csv_to_array(a[:tags])
+      tags.include?(desired_tag) if tags
+    end.each do |article| %>
+      <li>
+        <span class="descr"><a href="<%= article.path %>" alt="<%= article.title %>"><%= article.title %></a><br/></span>
+      </li>
+    <% end %>
+    </ul>
+    <br/>
+
+Now, you did most likely implement a tag listing on your toto blog. Congrats!
+
+BTW: part of my to dos is encapsulating the tag parsing process so you won't have to fiddle around with too much ruby code here...
