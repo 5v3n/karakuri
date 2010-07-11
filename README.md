@@ -9,7 +9,7 @@ This a a collection of tools usable in both platforms.
 - tag your posts
 - use seo friendly page titles
 - use the disqus comment counter
-- a workaround for seriuous allowing you to use generic yaml fields
+- a workaround for serious allowing you to use generic yaml fields
 
 ## Installation
 
@@ -47,9 +47,9 @@ Adding the tagging feature requires the _toto_prerelease_ as mentioned above, si
 To add a list of tags to your article, just use a custom yaml attribute:
 
     title: The Wonderful Wizard of Oz
-   *tags: hacks, love, rock 'n' roll*
     author: Lyman Frank Baum
     date: 1900/05/17
+    tags: hacks, love, rock 'n' roll
 
     Dorothy lived in the midst of the great Kansas prairies, with Uncle Henry,
     who was a farmer, and Aunt Em, who was the farmer's wife.
@@ -63,7 +63,12 @@ Next, you need a place to show the tag links, for example the index.rhtml:
           <header>
             <h1><a href="<%= article.path %>"><%= article.title %></a></h1>
             <span class="descr"><%= article.date %></span><% 10.times { %>&nbsp;<%}%>
-            <span class="tags">*<%= BlogHelper::tag_link_list(article[:tags])  %>*</span><% 10.times { %>&nbsp;<%}%>
+            <span class="tags">
+                <%= BlogHelper::tag_link_list(article[:tags])  %>
+            </span><% 10.times { %>&nbsp;<%}%>
+    .
+    .
+    .
 
 
 
@@ -106,3 +111,11 @@ Create a page called `tagged.rhtml` in your `templates/pages` directory that loo
 Now, you did most likely implement a tag listing on your toto blog. Congrats!
 
 BTW: part of my to dos is encapsulating the tag parsing process so you won't have to fiddle around with too much ruby code here...
+
+### disqus comment counter
+
+TBD... I have to refer to the source & ri for now.
+
+### serious custom yaml field reader
+
+TBD... I have to refer to the source & ri for now.
