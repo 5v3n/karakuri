@@ -25,18 +25,18 @@ Piece of cake, again: all you have to do is use `<% require 'blog_helper'%>` in 
 
 For example, to use seo friendly titles, your layout.rhtml should be looking like this:
 
-`
-<!doctype html>
-<html>
-  <head>
-    <% require 'blog_helper'
-       page_title = BlogHelper::generate_title(@path, title, 'yourSitesTitle.com')
-    %>
-.
-.
-.
-    <title><%=  page_title %></title>
-    <link rel="alternate" type="application/atom+xml" title="<%= page_title %> - feed" href="/index.xml" />
-.
-.
-.`
+
+    <!doctype html>
+    <html>
+      <head>
+        <% require 'blog_helper'
+           page_title = BlogHelper::generate_title(@path, title, 'yourSitesTitle.com')
+        %>
+    .
+    .
+    .
+        <title><%=  page_title %></title>
+        <link rel="alternate" type="application/atom+xml" title="<%= page_title %> - feed" href="/index.xml" />
+    .
+    .
+    .
