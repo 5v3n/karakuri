@@ -1,0 +1,11 @@
+== BlogHelper
+
+Having a closer look at ruby based blogging platforms like [serious](http://github.com/colszowka/serious) and [toto](http://cloudhead.io/toto), I missed some functionality.
+
+This a a collection of tools usable in both platforms.
+
+=== Features
+
+- tag your posts
+- use the disqus comment counter
+- a workaround for seriuous allowing you to use generic yaml fields
