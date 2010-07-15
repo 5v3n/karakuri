@@ -1,4 +1,5 @@
 require 'cgi'
+require 'net'
 
 # Some useful feature for serious, toto and the likes. Basically, any ruby based blog or site.
 module BlogHelper
