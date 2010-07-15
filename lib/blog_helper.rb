@@ -1,3 +1,5 @@
+require 'cgi'
+
 # Some useful feature for serious, toto and the likes. Basically, any ruby based blog or site.
 module BlogHelper
   # create a list of links to tagged articles, default link_format: <code>%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</code>
@@ -29,14 +31,13 @@ module BlogHelper
       end
       page_title
   end
-
-#Generates javascript to include to the bottom of your index page.
-#Appending '#disqus_thread' to the end of permalinks will replace the text of these links with the comment count.
-#
-#For example, you may have a link with this HTML: <code>&lt;a href=&quot;http://example.com/my_article.html#disqus_thread&quot;&gt;Comments&lt;/a&gt; </code>  The comment count code will replace the text "Comments" with the number of comments on the page
-#
-#(see http://disqus.com/comments/universal/ for details)
-#
+  #Generates javascript to include to the bottom of your index page.
+  #Appending '#disqus_thread' to the end of permalinks will replace the text of these links with the comment count.
+  #
+  #For example, you may have a link with this HTML: <code>&lt;a href=&quot;http://example.com/my_article.html#disqus_thread&quot;&gt;Comments&lt;/a&gt; </code>  The comment count code will replace the text "Comments" with the number of comments on the page
+  #
+  #(see http://disqus.com/comments/universal/ for details)
+  #
   def BlogHelper.disqus_comment_count_js(disqus_shortname)
     %&
       <script type="text/javascript">
@@ -49,5 +50,14 @@ module BlogHelper
       </script>
 
     & if disqus_shortname
+  end
+  # Retrieve bit.ly shortened url
+  def BlogHelper.short_url_bitly(url, login, api_key)
+    if api_key != "" && login != ""
+      rest_call=%{http://api.bit.ly/v3/shorten?login=#{login}&apikey=#{api_key}&longUrl=#{url}&format=txt}
+      Net::HTTP::get(URI.parse(rest_call))
+    else
+      url #fallback: return url to shorten - or nil if it isn't set
+    end
   end
 end

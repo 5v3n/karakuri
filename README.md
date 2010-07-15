@@ -112,6 +112,11 @@ Now, you did most likely implement a tag listing on your toto blog. Congrats!
 
 BTW: part of my to dos is encapsulating the tag parsing process so you won't have to fiddle around with too much ruby code here...
 
+### shor url (via bit.ly)
+
+    short_url = BlogHelper::short_url_bitly(<url>, <bit.ly login nam>, <bit.ly api key>)
+
+
 ### disqus comment counter
 
 TBD... I have to refer to the source & ri for now.
