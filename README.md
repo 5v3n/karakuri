@@ -114,7 +114,9 @@ BTW: part of my to dos is encapsulating the tag parsing process so you won't hav
 
 ### shor url (via bit.ly)
 
-    short_url = BlogHelper::short_url_bitly(<url>, <bit.ly login nam>, <bit.ly api key>)
+To use a bit.ly shortened URL, just call the followin function inside a .rhtml file:
+
+    <%= BlogHelper::short_url_bitly(<url>, <bit.ly login name>, <bit.ly api key>) %>
 
 
 ### disqus comment counter
