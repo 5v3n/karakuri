@@ -112,7 +112,7 @@ Now, you did most likely implement a tag listing on your toto blog. Congrats!
 
 BTW: part of my to dos is encapsulating the tag parsing process so you won't have to fiddle around with too much ruby code here...
 
-### shor url (via bit.ly)
+### short url (via bit.ly)
 
 To use a bit.ly shortened URL, just call the followin function inside a .rhtml file:
 
