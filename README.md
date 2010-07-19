@@ -79,28 +79,14 @@ Create a page called `tagged.rhtml` in your `templates/pages` directory that loo
     <%#
     # search given tags...
     %>
-
     <%
-     require 'cgi'
      require 'blog_helper'
-
-     desired_tag = env["QUERY_STRING"]
-       if desired_tag
-         start = desired_tag.index("=")
-         stop = desired_tag.index("&")
-         stop = 0 unless stop
-         desired_tag = desired_tag[start+1..stop-1]
-         desired_tag = CGI::unescape(desired_tag)
-       end
-
+     desired_tag = BlogHelper::desired_tag(env["QUERY_STRING"])
     %>
     <h1>Posts filed under '<%= desired_tag %>': </h1>
     <ul>
 
-    <% @articles.select do |a|
-      tags = BlogHelper::csv_to_array(a[:tags])
-      tags.include?(desired_tag) if tags
-    end.each do |article| %>
+    <% BlogHelper::desired_articles(@articles, desired_tag).each do |article| %>
       <li>
         <span class="descr"><a href="<%= article.path %>" alt="<%= article.title %>"><%= article.title %></a><br/></span>
       </li>
@@ -110,7 +96,6 @@ Create a page called `tagged.rhtml` in your `templates/pages` directory that loo
 
 Now, you did most likely implement a tag listing on your toto blog. Congrats!
 
-BTW: part of my to dos is encapsulating the tag parsing process so you won't have to fiddle around with too much ruby code here...
 
 ### short url (via bit.ly)
 

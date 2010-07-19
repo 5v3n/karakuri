@@ -12,7 +12,7 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'blog_helper'
-  s.version = '0.0.8'
+  s.version = '0.0.9'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.md', 'LICENSE']
   s.summary = 'Some handy helpers for serious, toto and the likes...'
