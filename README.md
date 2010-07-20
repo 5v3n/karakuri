@@ -113,7 +113,7 @@ Mind the usage of `@config[:disqus]`, this enables configuration via `config.ru`
 
 To access the comment count, use `#disqus_thread` at the end of the permalink to the post & it will be replaced with the disqus comment count:
 
-    <<a href="<%= article.path %>#disqus_thread">&nbsp;</a>
+    <a href="<%= article.path %>#disqus_thread">&nbsp;</a>
 
 Will result in the number of comments of the article the permalink posts to.
 
