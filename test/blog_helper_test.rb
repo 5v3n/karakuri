@@ -19,6 +19,8 @@ class BlogHelperTest < Test::Unit::TestCase
   BITLY_LOGIN         = 'bitlyapidemo'
   BITLY_API_KEY       = 'R_0da49e0a9118ff35f52f629d2d71bf07'
 
+  EXPECTED_TAG_01     = "rock 'n' roll"
+  GIVEN_QUERY_01      = "tag=rock%20%27n%27%20roll"
 
   def test_process_to_array
     result_nil = BlogHelper::csv_to_array(nil)
@@ -63,4 +65,46 @@ class BlogHelperTest < Test::Unit::TestCase
       assert(short_url == EXPECTED_SHORT_URL, "generated short url: '#{short_url}', but should be '#{EXPECTED_SHORT_URL}'")
     end
   end
+  def test_desired_tag
+    result = BlogHelper::desired_tag(GIVEN_QUERY_01)
+    assert(result == EXPECTED_TAG_01, "Wrong tag extracted! Expected '#{EXPECTED_TAG_01}', but was '#{result}'")
+    result = BlogHelper::desired_tag("tag=")
+    assert(result == '', "Result expected to be empty, but was #{result}")
+    result = BlogHelper::desired_tag("tag")
+    assert(result == '', "Result expected to be empty, but was #{result}")
+    result = BlogHelper::desired_tag("")
+    assert(result == '', "Result expected to be empty, but was #{result}")
+    result = BlogHelper::desired_tag(nil)
+    assert(result == nil, "Result expected to be nil, but was #{result}")
+  end
+  def test_desired_articles
+    #there's no article objects in this context, so we just use hash mock-ups...
+    article_01_mock = Hash.new()
+    article_02_mock = Hash.new()
+    article_03_mock = Hash.new()
+
+    article_01_mock[:tags] = STRING_04
+    article_01_mock[:title] = "article01"
+    article_02_mock[:tags] = ""
+    article_02_mock[:title] = "article02"
+    article_03_mock[:tags] = "love"
+    article_03_mock[:title] = "article03"
+
+    articles = Array.new()
+    articles << article_01_mock << article_02_mock << article_03_mock
+
+    result = BlogHelper::desired_articles(articles, "love")
+    assert(result != nil && result[0] != nil && result[0] == article_01_mock && result[1] != nil && result[1] == article_03_mock,
+      "Result expected to be first & second article, but was #{result.inspect}")
+
+    result = BlogHelper::desired_articles(articles, "hacks")
+    assert(result != nil && result.first != nil && result.first == article_01_mock, "Result expected to be first article, but was #{result.inspect}")
+
+    result = BlogHelper::desired_articles(articles, nil)
+    assert(result == nil, "Result expected to be nil, but was #{result}")
+
+    result = BlogHelper::desired_articles(nil, nil)
+    assert(result == nil, "Result expected to be nil, but was #{result}")
+  end
+
 end

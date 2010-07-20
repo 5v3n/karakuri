@@ -63,7 +63,7 @@ module BlogHelper
       url #fallback: return url to shorten - or nil if it isn't set
     end
   end
-  #desired to a corresponding tag
+  #desired articles matching a corresponding tag
   def BlogHelper.desired_articles(articles, tag)
     if(articles && tag)
       articles.select do |a|
@@ -72,20 +72,20 @@ module BlogHelper
       end
     end
   end
-  # extract desired tag from <code>env["QUERY_STRING"]</code> or an equally formed expression
-  def BlogHelper.desired_tag(tag)
-    if tag
-     start = tag.index("tag=")
-     if start
-       start = start + 3
-       stop = tag.index("&")
-       stop = 0 unless stop
-       desired_tag = tag[start+1..stop-1]
-       desired_tag = CGI::unescape(desired_tag)
-     else
-       '' #fallback: return empty string to prevent nil errors
-     end
-   end
+  # extract desired tag from <code>env["QUERY_STRING"]</code> or an equally formed expression, e.g. tag=desired_tag
+  def BlogHelper.desired_tag(query_string)
+    if query_string
+      start = query_string.index("tag=")
+      if start
+        start = start + 3
+        stop = query_string.index("&")
+        stop = 0 unless stop
+        desired_tag = query_string[start+1..stop-1]
+        desired_tag = CGI::unescape(desired_tag)
+      else
+        '' #fallback: return empty string to prevent nil errors
+      end
+    end
   end
   
 end
