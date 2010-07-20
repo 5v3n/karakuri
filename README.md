@@ -33,14 +33,12 @@ For example, to use seo friendly titles, your layout.rhtml should be looking lik
         <% require 'blog_helper'
            page_title = BlogHelper::seo_friendly_title(@path, title, 'yourSitesTitle.com')
         %>
-    .
-    .
-    .
         <title><%=  page_title %></title>
         <link rel="alternate" type="application/atom+xml" title="<%= page_title %> - feed" href="/index.xml" />
     .
     .
     .
+
 ### Tags
 Adding the tagging feature requires the _toto_prerelease_ as mentioned above, since we need the http request to apply our little hack.
 
@@ -76,9 +74,7 @@ And again: piece of caked ;-). Now all we need to add is a page that displays ar
 
 Create a page called `tagged.rhtml` in your `templates/pages` directory that looks like this:
 
-    <%#
-    # search given tags...
-    %>
+
     <%
      require 'blog_helper'
      desired_tag = BlogHelper::desired_tag(env["QUERY_STRING"])
@@ -106,7 +102,20 @@ To use a bit.ly shortened URL, just call the followin function inside a .rhtml f
 
 ### disqus comment counter
 
-TBD... I have to refer to the source & ri for now.
+Basically just adds the necessary java script to enable the disqus comment counter. For best performance, place it near the end of the page:
+
+        <%= BlogHelper::disqus_comment_count_js(@config[:disqus]) %>
+      </body>
+
+    </html>
+
+Mind the usage of `@config[:disqus]`, this enables configuration via `config.ru`.
+
+To access the comment count, use `#disqus_thread` at the end of the permalink to the post & it will be replaced with the disqus comment count:
+
+    <<a href="<%= article.path %>#disqus_thread">&nbsp;</a>
+
+Will result in the number of comments of the article the permalink posts to.
 
 ### serious custom yaml field reader
 
