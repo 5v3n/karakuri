@@ -1,6 +1,7 @@
 # extension to BlogHelper with special methods for serious
 require 'blog_helper'
 module SeriousBlogHelper
+  #extract tags from article
   def SeriousBlogHelper.tags_from_article(article=nil)
     tags_marker = %&tags"=>&
     if article && article.inspect.index(tags_marker)

@@ -2,10 +2,13 @@ require 'cgi'
 require 'net/http'
 require 'uri'
 
-
+#
 # Some useful feature for serious, toto and the likes. Basically, any ruby based blog or site.
+#
 module BlogHelper
+  #
   # create a list of links to tagged articles, default link_format: <code>%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</code>
+  #
   def BlogHelper.tag_link_list(csv_string)
     # read csv-string into array
     tag_list = csv_to_array(csv_string)
@@ -16,13 +19,17 @@ module BlogHelper
     end
     tag_string
   end
+  #
   # processes a csv-string into an array
+  #
   def BlogHelper.csv_to_array(csv_string)
       #split & handle forgotten spaces after the separator. then flatten the multidemnsional array:
       csv_string.split(', ').map{ |e| e.split(',')}.flatten if csv_string
   end
+  #
   # pass the path (@path for a toto blog) & the desired SEO ending, e.g. the name of your blog.
   # example for toto: <code>seo_friendly_title(@path, title, "mysite.com") will produce 'subpage | mysite.com' as seo friendly page title.</code>
+  #
   def BlogHelper.seo_friendly_title(path, title, seo_ending)
     #TODO use custom title separator...
        if path == 'index'
@@ -34,6 +41,7 @@ module BlogHelper
       end
       page_title
   end
+  #
   #Generates javascript to include to the bottom of your index page.
   #Appending '#disqus_thread' to the end of permalinks will replace the text of these links with the comment count.
   #
@@ -54,13 +62,21 @@ module BlogHelper
 
     & if disqus_shortname
   end
+  #
   # Retrieve bit.ly shortened url
+  #
   def BlogHelper.short_url_bitly(url, login, api_key)
     if api_key != "" && login != ""
       rest_call=%{http://api.bit.ly/v3/shorten?login=#{login}&apikey=#{api_key}&longUrl=#{url}&format=txt}
-      Net::HTTP::get(URI.parse(rest_call)) # handle http errors (esp. timeouts!)
+      begin
+        Net::HTTP::get(URI.parse(rest_call)) # handle http errors (esp. timeouts!)
+      rescue URI::InvalidURIError
+        raise URI::InvalidURIError
+      rescue
+        url#in the case of a web service or HTTP error, we'll just ignore it & return the long url
+      end
     else
-      url #fallback: return url to shorten - or nil if it isn't set
+      url #fallback: return long url if no proper login has been provided. TODO: check if a call w/o login is possible
     end
   end
   #desired articles matching a corresponding tag
