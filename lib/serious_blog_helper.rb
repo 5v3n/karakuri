@@ -1,5 +1,5 @@
-# extension to BlogHelper with special methods for serious
-require 'blog_helper'
+# extension to Karakuri with special methods for serious
+require 'karakuri'
 module SeriousBlogHelper
   #extract tags from article
   def SeriousBlogHelper.tags_from_article(article=nil)

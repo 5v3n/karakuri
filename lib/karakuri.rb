@@ -3,13 +3,13 @@ require 'net/http'
 require 'uri'
 
 #
-# Some useful feature for serious, toto and the likes. Basically, any ruby based blog or site.
+# Some useful feature for toto and the likes. Basically, any ruby based blog or site.
 #
-module BlogHelper
+module Karakuri
   #
   # create a list of links to tagged articles, default link_format: <code>%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</code>
   #
-  def BlogHelper.tag_link_list(csv_string)
+  def Karakuri.tag_link_list(csv_string)
     # read csv-string into array
     tag_list = csv_to_array(csv_string)
     if tag_list
@@ -22,7 +22,7 @@ module BlogHelper
   #
   # processes a csv-string into an array
   #
-  def BlogHelper.csv_to_array(csv_string)
+  def Karakuri.csv_to_array(csv_string)
       #split & handle forgotten spaces after the separator. then flatten the multidemnsional array:
       csv_string.split(', ').map{ |e| e.split(',')}.flatten if csv_string
   end
@@ -30,7 +30,7 @@ module BlogHelper
   # pass the path (@path for a toto blog) & the desired SEO ending, e.g. the name of your blog.
   # example for toto: <code>seo_friendly_title(@path, title, "mysite.com") will produce 'subpage | mysite.com' as seo friendly page title.</code>
   #
-  def BlogHelper.seo_friendly_title(path, title, seo_ending)
+  def Karakuri.seo_friendly_title(path, title, seo_ending)
     #TODO use custom title separator...
        if path == 'index'
         page_title = seo_ending
@@ -49,7 +49,7 @@ module BlogHelper
   #
   #(see http://disqus.com/comments/universal/ for details)
   #
-  def BlogHelper.disqus_comment_count_js(disqus_shortname)
+  def Karakuri.disqus_comment_count_js(disqus_shortname)
     %&
       <script type="text/javascript">
       var disqus_shortname = '#{disqus_shortname}';
@@ -65,7 +65,7 @@ module BlogHelper
   #
   # Retrieve bit.ly shortened url
   #
-  def BlogHelper.short_url_bitly(url, login, api_key)
+  def Karakuri.short_url_bitly(url, login, api_key)
     if api_key != "" && login != ""
       rest_call=%{http://api.bit.ly/v3/shorten?login=#{login}&apikey=#{api_key}&longUrl=#{url}&format=txt}
       begin
@@ -80,16 +80,16 @@ module BlogHelper
     end
   end
   #desired articles matching a corresponding tag
-  def BlogHelper.desired_articles(articles, tag)
+  def Karakuri.desired_articles(articles, tag)
     if(articles && tag)
       articles.select do |a|
-        tags = BlogHelper::csv_to_array(a[:tags])
+        tags = Karakuri::csv_to_array(a[:tags])
         tags.include?(tag) if tags
       end
     end
   end
   # extract desired tag from <code>env["QUERY_STRING"]</code> or an equally formed expression, e.g. tag=desired_tag
-  def BlogHelper.desired_tag(query_string)
+  def Karakuri.desired_tag(query_string)
     if query_string
       start = query_string.index("tag=")
       if start

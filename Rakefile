@@ -11,15 +11,15 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
-  s.name = 'blog_helper'
-  s.version = '0.0.10'
+  s.name = 'karakuri'
+  s.version = '0.1.0'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.md', 'LICENSE']
-  s.summary = 'Some handy helpers for serious, toto and the likes...'
+  s.summary = 'Some handy helpers for toto and the likes...'
   s.description = s.summary
-  s.author = 'Sven Kräuter'
-  s.email = 'sven.krauter@gmx.net'
-  s.homepage = 'http://github.com/5v3n/blog_helper'
+  s.author = 'Sven Kraeuter'
+  s.email = 'mail@5v3n.com'
+  s.homepage = 'http://github.com/5v3n/karakuri'
   # s.executables = ['your_executable_here']
   s.files = %w(LICENSE README.md Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
   s.require_path = "lib"
@@ -36,7 +36,7 @@ Rake::RDocTask.new do |rdoc|
   files =['README.md', 'LICENSE', 'lib/**/*.rb']
   rdoc.rdoc_files.add(files)
   rdoc.main = "README" # page to start on
-  rdoc.title = "BlogHelper Docs"
+  rdoc.title = "Karakuri Docs"
   rdoc.rdoc_dir = 'doc/rdoc' # rdoc output folder
   rdoc.options << '--line-numbers'
 end
