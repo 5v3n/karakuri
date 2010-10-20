@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_short_url_bitly (KarakuriTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/karakuri_test.rb, line 56</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_short_url_bitly</span>
+    <span class="ruby-identifier">short_url</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">short_url_bitly</span>(<span class="ruby-constant">TEST_URL</span>, <span class="ruby-value str">&quot;&quot;</span>, <span class="ruby-value str">&quot;&quot;</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">short_url</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TEST_URL</span>, <span class="ruby-node">&quot;generated short url: '#{short_url}', but should be '#{TEST_URL}' since no login and/or api key are given.&quot;</span>)
+    <span class="ruby-identifier">aok</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-identifier">short_url</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">short_url_bitly</span>(<span class="ruby-value str">&quot;invalid url&quot;</span>, <span class="ruby-constant">BITLY_LOGIN</span>, <span class="ruby-constant">BITLY_API_KEY</span>)
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+       <span class="ruby-identifier">aok</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">ensure</span> <span class="ruby-comment cmt"># make sure the result is checked &amp; the remaining tests are executed</span>
+      <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">aok</span>, <span class="ruby-value str">&quot;Invalid url should have resulted in an InvalidURIError!&quot;</span>)
+      <span class="ruby-identifier">short_url</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">short_url_bitly</span>(<span class="ruby-constant">TEST_URL</span>, <span class="ruby-constant">BITLY_LOGIN</span>, <span class="ruby-constant">BITLY_API_KEY</span>)
+      <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">short_url</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">'RATE_LIMIT_EXCEEDED'</span>, <span class="ruby-value str">&quot;Use your own login &amp; api key if the demo account's rate limit is reached...&quot;</span>)
+      <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">short_url</span> <span class="ruby-operator">==</span> <span class="ruby-constant">EXPECTED_SHORT_URL</span>, <span class="ruby-node">&quot;generated short url: '#{short_url}', but should be '#{EXPECTED_SHORT_URL}'&quot;</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

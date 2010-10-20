@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_desired_articles (KarakuriTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/karakuri_test.rb, line 83</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_desired_articles</span>
+    <span class="ruby-comment cmt">#there's no article objects in this context, so we just use hash mock-ups...</span>
+    <span class="ruby-identifier">article_01_mock</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>()
+    <span class="ruby-identifier">article_02_mock</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>()
+    <span class="ruby-identifier">article_03_mock</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>()
+
+    <span class="ruby-identifier">article_01_mock</span>[<span class="ruby-identifier">:tags</span>] = <span class="ruby-constant">STRING_04</span>
+    <span class="ruby-identifier">article_01_mock</span>[<span class="ruby-identifier">:title</span>] = <span class="ruby-value str">&quot;article01&quot;</span>
+    <span class="ruby-identifier">article_02_mock</span>[<span class="ruby-identifier">:tags</span>] = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-identifier">article_02_mock</span>[<span class="ruby-identifier">:title</span>] = <span class="ruby-value str">&quot;article02&quot;</span>
+    <span class="ruby-identifier">article_03_mock</span>[<span class="ruby-identifier">:tags</span>] = <span class="ruby-value str">&quot;love&quot;</span>
+    <span class="ruby-identifier">article_03_mock</span>[<span class="ruby-identifier">:title</span>] = <span class="ruby-value str">&quot;article03&quot;</span>
+
+    <span class="ruby-identifier">articles</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
+    <span class="ruby-identifier">articles</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">article_01_mock</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">article_02_mock</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">article_03_mock</span>
+
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_articles</span>(<span class="ruby-identifier">articles</span>, <span class="ruby-value str">&quot;love&quot;</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">article_01_mock</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">article_03_mock</span>,
+      <span class="ruby-node">&quot;Result expected to be first &amp; second article, but was #{result.inspect}&quot;</span>)
+
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_articles</span>(<span class="ruby-identifier">articles</span>, <span class="ruby-value str">&quot;hacks&quot;</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">article_01_mock</span>, <span class="ruby-node">&quot;Result expected to be first article, but was #{result.inspect}&quot;</span>)
+
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_articles</span>(<span class="ruby-identifier">articles</span>, <span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-node">&quot;Result expected to be nil, but was #{result}&quot;</span>)
+
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_articles</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-node">&quot;Result expected to be nil, but was #{result}&quot;</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

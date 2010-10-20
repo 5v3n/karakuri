@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>disqus_comment_count_js (Karakuri)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/karakuri.rb, line 52</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">disqus_comment_count_js</span>(<span class="ruby-identifier">disqus_shortname</span>)
+    <span class="ruby-node">%&amp;
+      &lt;script type=&quot;text/javascript&quot;&gt;
+      var disqus_shortname = '#{disqus_shortname}';
+      (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.src = 'http://disqus.com/forums/#{disqus_shortname}/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+      }());
+      &lt;/script&gt;
+
+    &amp;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">disqus_shortname</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

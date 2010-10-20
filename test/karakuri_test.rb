@@ -6,7 +6,7 @@ $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 require 'test/unit'
 require 'karakuri'
 
-class BlogHelperTest < Test::Unit::TestCase
+class KarakuriTest < Test::Unit::TestCase
   #TODO DRY! use methods for the repetitive parts of the test!
   STRING_00 = ""
   STRING_01 = "tag_1"

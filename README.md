@@ -1,4 +1,4 @@
-# BlogHelper
+# Karakuri
 
 Having a closer look at ruby based blogging platforms like [serious](http://github.com/colszowka/serious) and [toto](http://cloudhead.io/toto), I missed some functionality.
 

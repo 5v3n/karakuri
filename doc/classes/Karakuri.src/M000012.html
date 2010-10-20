@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>short_url_bitly (Karakuri)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/karakuri.rb, line 68</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">short_url_bitly</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">login</span>, <span class="ruby-identifier">api_key</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">api_key</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">login</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">rest_call</span>=<span class="ruby-node">%{http://api.bit.ly/v3/shorten?login=#{login}&amp;apikey=#{api_key}&amp;longUrl=#{url}&amp;format=txt}</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-identifier">get</span>(<span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">rest_call</span>)) <span class="ruby-comment cmt"># handle http errors (esp. timeouts!)</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+      <span class="ruby-keyword kw">rescue</span>
+        <span class="ruby-identifier">url</span><span class="ruby-comment cmt">#in the case of a web service or HTTP error, we'll just ignore it &amp; return the long url</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">url</span> <span class="ruby-comment cmt">#fallback: return long url if no proper login has been provided. TODO: check if a call w/o login is possible</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

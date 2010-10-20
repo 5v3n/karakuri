@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_process_to_array (KarakuriTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/karakuri_test.rb, line 25</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_process_to_array</span>
+    <span class="ruby-identifier">result_nil</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">csv_to_array</span>(<span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result_nil</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">&quot;nil should return nil!&quot;</span>)
+    <span class="ruby-identifier">result_00</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">csv_to_array</span>(<span class="ruby-constant">STRING_00</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result_00</span> <span class="ruby-operator">==</span> [], <span class="ruby-node">&quot;Unexpected result for #{STRING_00}!&quot;</span>)
+    <span class="ruby-identifier">result_01</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">csv_to_array</span>(<span class="ruby-constant">STRING_01</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result_01</span> <span class="ruby-operator">==</span> [<span class="ruby-value str">&quot;tag_1&quot;</span>], <span class="ruby-node">&quot;Unexpected result for #{STRING_01}!&quot;</span>)
+    <span class="ruby-identifier">result_02</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">csv_to_array</span>(<span class="ruby-constant">STRING_02</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result_02</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>[<span class="ruby-value str">&quot;tag_1&quot;</span>, <span class="ruby-value str">&quot;tag_2&quot;</span>], <span class="ruby-node">&quot;Unexpected result for #{STRING_02}!&quot;</span>)
+    <span class="ruby-identifier">result_03</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">csv_to_array</span>(<span class="ruby-constant">STRING_03</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result_03</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>[<span class="ruby-value str">&quot;tag_1&quot;</span>, <span class="ruby-value str">&quot;tag_2&quot;</span>, <span class="ruby-value str">&quot;tag_3&quot;</span>], <span class="ruby-node">&quot;Unexpected result for #{STRING_03}!&quot;</span>)
+    <span class="ruby-identifier">result_04</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">csv_to_array</span>(<span class="ruby-constant">STRING_04</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result_04</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>[<span class="ruby-value str">&quot;hacks&quot;</span>, <span class="ruby-value str">&quot;love&quot;</span>, <span class="ruby-value str">&quot;rock 'n' roll&quot;</span>], <span class="ruby-node">&quot;Unexpected result for #{STRING_04}!&quot;</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

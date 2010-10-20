@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_desired_tag (KarakuriTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/karakuri_test.rb, line 71</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_desired_tag</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_tag</span>(<span class="ruby-constant">GIVEN_QUERY_01</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-constant">EXPECTED_TAG_01</span>, <span class="ruby-node">&quot;Wrong tag extracted! Expected '#{EXPECTED_TAG_01}', but was '#{result}'&quot;</span>)
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_tag</span>(<span class="ruby-value str">&quot;tag=&quot;</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>, <span class="ruby-node">&quot;Result expected to be empty, but was #{result}&quot;</span>)
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_tag</span>(<span class="ruby-value str">&quot;tag&quot;</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>, <span class="ruby-node">&quot;Result expected to be empty, but was #{result}&quot;</span>)
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_tag</span>(<span class="ruby-value str">&quot;&quot;</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>, <span class="ruby-node">&quot;Result expected to be empty, but was #{result}&quot;</span>)
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">desired_tag</span>(<span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-node">&quot;Result expected to be nil, but was #{result}&quot;</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
