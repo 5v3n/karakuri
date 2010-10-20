@@ -13,7 +13,7 @@ This a a collection of tools usable in both platforms.
 
 ## Installation
 
-It's a piece of cake: just use the `gem` tool to get going with the _blog_helper_: `sudo gem install blog_helper`
+It's a piece of cake: just use the `gem` tool to get going with the _Karakuri_: `sudo gem install karakuri`
 
 If you want to use features that rely on accessing the http requests like the _tag_ feature, you'll need to use the [_toto_prerelease_](http://github.com/5v3n/toto).
 
@@ -21,7 +21,7 @@ Please follow the instrucions there to do so.
 
 ## Usage
 
-Piece of cake, again: all you have to do is use `<% require 'blog_helper'%>` in your .rhtml or .erb file and call the corresponding methods.
+Piece of cake, again: all you have to do is use `<% require 'karakuri'%>` in your .rhtml or .erb file and call the corresponding methods.
 
 ### SEO friendly titles
 For example, to use seo friendly titles, your layout.rhtml should be looking like this:
@@ -31,7 +31,7 @@ For example, to use seo friendly titles, your layout.rhtml should be looking lik
     <html>
       <head>
         <% require 'blog_helper'
-           page_title = BlogHelper::seo_friendly_title(@path, title, 'yourSitesTitle.com')
+           page_title = Karakuri::seo_friendly_title(@path, title, 'yourSitesTitle.com')
         %>
         <title><%=  page_title %></title>
         <link rel="alternate" type="application/atom+xml" title="<%= page_title %> - feed" href="/index.xml" />
@@ -62,7 +62,7 @@ Next, you need a place to show the tag links, for example the index.rhtml:
             <h1><a href="<%= article.path %>"><%= article.title %></a></h1>
             <span class="descr"><%= article.date %></span><% 10.times { %>&nbsp;<%}%>
             <span class="tags">
-                <%= BlogHelper::tag_link_list(article[:tags])  %>
+                <%= Karakuri::tag_link_list(article[:tags])  %>
             </span><% 10.times { %>&nbsp;<%}%>
     .
     .
@@ -77,12 +77,12 @@ Create a page called `tagged.rhtml` in your `templates/pages` directory that loo
 
     <%
      require 'blog_helper'
-     desired_tag = BlogHelper::desired_tag(env["QUERY_STRING"])
+     desired_tag = Karakuri::desired_tag(env["QUERY_STRING"])
     %>
     <h1>Posts filed under '<%= desired_tag %>': </h1>
     <ul>
 
-    <% BlogHelper::desired_articles(@articles, desired_tag).each do |article| %>
+    <% Karakuri::desired_articles(@articles, desired_tag).each do |article| %>
       <li>
         <span class="descr"><a href="<%= article.path %>" alt="<%= article.title %>"><%= article.title %></a><br/></span>
       </li>
@@ -97,14 +97,14 @@ Now, you did most likely implement a tag listing on your toto blog. Congrats!
 
 To use a bit.ly shortened URL, just call the followin function inside a .rhtml file:
 
-    <%= BlogHelper::short_url_bitly(<url>, <bit.ly login name>, <bit.ly api key>) %>
+    <%= Karakuri::short_url_bitly(<url>, <bit.ly login name>, <bit.ly api key>) %>
 
 
 ### disqus comment counter
 
 Basically just adds the necessary java script to enable the disqus comment counter. For best performance, place it near the end of the page:
 
-        <%= BlogHelper::disqus_comment_count_js(@config[:disqus]) %>
+        <%= Karakuri::disqus_comment_count_js(@config[:disqus]) %>
       </body>
 
     </html>
