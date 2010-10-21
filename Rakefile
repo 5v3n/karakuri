@@ -12,7 +12,7 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'karakuri'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.md', 'LICENSE']
   s.summary = 'Some handy helpers for toto and the likes...'
@@ -35,7 +35,7 @@ end
 Rake::RDocTask.new do |rdoc|
   files =['README.md', 'LICENSE', 'lib/**/*.rb']
   rdoc.rdoc_files.add(files)
-  rdoc.main = "README" # page to start on
+  rdoc.main = "README.md" # page to start on
   rdoc.title = "Karakuri Docs"
   rdoc.rdoc_dir = 'doc/rdoc' # rdoc output folder
   rdoc.options << '--line-numbers'

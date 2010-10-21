@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.md [Karakuri Docs]</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }<\/style>" )
+
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+  <div id="fileHeader">
+    <h1>README.md</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.md
+
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>2010-10-21 00:36:02 +0200</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+# <a href="../classes/Karakuri.html">Karakuri</a>
+</p>
+<p>
+Having a closer look at ruby based blogging platforms like [serious](<a
+href="http://github.com/colszowka/serious">github.com/colszowka/serious</a>)
+and [toto](<a href="http://cloudhead.io/toto">cloudhead.io/toto</a>), I
+missed some functionality.
+</p>
+<p>
+This a a collection of tools usable in both platforms. The project was
+formerly known as blog_helper, but <a
+href="../classes/Karakuri.html">Karakuri</a> is a fra more suitable name
+&amp; will be used from now on.
+</p>
+<p>
+## Features
+</p>
+<ul>
+<li>tag your posts
+
+</li>
+<li>use seo friendly page titles
+
+</li>
+<li>use the disqus comment counter
+
+</li>
+<li>a workaround for serious allowing you to use generic yaml fields
+
+</li>
+</ul>
+<p>
+## Installation
+</p>
+<p>
+It&#8217;s a piece of cake: just use the `gem` tool to get going with the
+<em>Karakuri</em>: `sudo gem install karakuri`
+</p>
+<p>
+If you want to use features that rely on accessing the http requests like
+the <em>tag</em> feature, you&#8217;ll need to use the
+[<em>toto_prerelease</em>](<a
+href="http://github.com/5v3n/toto">github.com/5v3n/toto</a>).
+</p>
+<p>
+Please follow the instrucions there to do so.
+</p>
+<p>
+## Usage
+</p>
+<p>
+Piece of cake, again: all you have to do is use `<% require
+&#8216;karakuri&#8217;%>` in your .rhtml or .erb file and call the
+corresponding methods.
+</p>
+<p>
+### SEO friendly titles For example, to use seo friendly titles, your
+layout.rhtml should be looking like this:
+</p>
+<pre>
+    &lt;!doctype html&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;% require 'blog_helper'
+           page_title = Karakuri::seo_friendly_title(@path, title, 'yourSitesTitle.com')
+        %&gt;
+        &lt;title&gt;&lt;%=  page_title %&gt;&lt;/title&gt;
+        &lt;link rel=&quot;alternate&quot; type=&quot;application/atom+xml&quot; title=&quot;&lt;%= page_title %&gt; - feed&quot; href=&quot;/index.xml&quot; /&gt;
+    .
+    .
+    .
+</pre>
+<p>
+### Tags Adding the tagging feature requires the <em>toto_prerelease</em>
+as mentioned above, since we need the http request to apply our little
+hack.
+</p>
+<p>
+To add a list of tags to your article, just use a custom yaml attribute:
+</p>
+<pre>
+    title: The Wonderful Wizard of Oz
+    author: Lyman Frank Baum
+    date: 1900/05/17
+    tags: hacks, love, rock 'n' roll
+
+    Dorothy lived in the midst of the great Kansas prairies, with Uncle Henry,
+    who was a farmer, and Aunt Em, who was the farmer's wife.
+</pre>
+<p>
+Next, you need a place to show the tag links, for example the index.rhtml:
+</p>
+<pre>
+    &lt;section id=&quot;articles&quot;&gt;
+      &lt;% require 'blog_helper' %&gt;
+      &lt;% for article in articles[0...10] %&gt;
+        &lt;article class=&quot;post&quot;&gt;
+          &lt;header&gt;
+            &lt;h1&gt;&lt;a href=&quot;&lt;%= article.path %&gt;&quot;&gt;&lt;%= article.title %&gt;&lt;/a&gt;&lt;/h1&gt;
+            &lt;span class=&quot;descr&quot;&gt;&lt;%= article.date %&gt;&lt;/span&gt;&lt;% 10.times { %&gt;&amp;nbsp;&lt;%}%&gt;
+            &lt;span class=&quot;tags&quot;&gt;
+                &lt;%= Karakuri::tag_link_list(article[:tags])  %&gt;
+            &lt;/span&gt;&lt;% 10.times { %&gt;&amp;nbsp;&lt;%}%&gt;
+    .
+    .
+    .
+</pre>
+<p>
+And again: piece of caked ;-). Now all we need to add is a page that
+displays articles belonging to a ceratin tag:
+</p>
+<p>
+Create a page called `tagged.rhtml` in your `templates/pages` directory
+that looks like this:
+</p>
+<pre>
+    &lt;%
+     require 'blog_helper'
+     desired_tag = Karakuri::desired_tag(env[&quot;QUERY_STRING&quot;])
+    %&gt;
+    &lt;h1&gt;Posts filed under '&lt;%= desired_tag %&gt;': &lt;/h1&gt;
+    &lt;ul&gt;
+
+    &lt;% Karakuri::desired_articles(@articles, desired_tag).each do |article| %&gt;
+      &lt;li&gt;
+        &lt;span class=&quot;descr&quot;&gt;&lt;a href=&quot;&lt;%= article.path %&gt;&quot; alt=&quot;&lt;%= article.title %&gt;&quot;&gt;&lt;%= article.title %&gt;&lt;/a&gt;&lt;br/&gt;&lt;/span&gt;
+      &lt;/li&gt;
+    &lt;% end %&gt;
+    &lt;/ul&gt;
+    &lt;br/&gt;
+</pre>
+<p>
+Now, you did most likely implement a tag listing on your toto blog.
+Congrats!
+</p>
+<p>
+### short url (via bit.ly)
+</p>
+<p>
+To use a bit.ly shortened URL, just call the followin function inside a
+.rhtml file:
+</p>
+<pre>
+    &lt;%= Karakuri::short_url_bitly(&lt;url&gt;, &lt;bit.ly login name&gt;, &lt;bit.ly api key&gt;) %&gt;
+</pre>
+<p>
+### disqus comment counter
+</p>
+<p>
+Basically just adds the necessary java script to enable the disqus comment
+counter. For best performance, place it near the end of the page:
+</p>
+<pre>
+        &lt;%= Karakuri::disqus_comment_count_js(@config[:disqus]) %&gt;
+      &lt;/body&gt;
+
+    &lt;/html&gt;
+</pre>
+<p>
+Mind the usage of `@config[:disqus]`, this enables configuration via
+`config.ru`.
+</p>
+<p>
+To access the comment count, use `disqus_thread` at the end of the
+permalink to the post &amp; it will be replaced with the disqus comment
+count:
+</p>
+<pre>
+    &lt;a href=&quot;&lt;%= article.path %&gt;#disqus_thread&quot;&gt;&amp;nbsp;&lt;/a&gt;
+</pre>
+<p>
+Will result in the number of comments of the article the permalink posts
+to.
+</p>
+<p>
+### serious custom yaml field reader
+</p>
+<p>
+TBD&#8230; I have to refer to the source &amp; ri for now.
+</p>
+
+    </div>
+
+   </div>
+
+
+  </div>
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+    <!-- if method_list -->
+
+
+
+
+  </div>
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

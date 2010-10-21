@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Karakuri [Karakuri Docs]</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }<\/style>" )
+
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Karakuri</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+
+
+                <a href="../files/lib/karakuri_rb.html">
+
+                lib/karakuri.rb
+
+                </a>
+
+
+        <br />
+
+            </td>
+        </tr>
+
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Some useful feature for toto and the likes. Basically, any ruby based blog
+or site.
+</p>
+
+    </div>
+
+   </div>
+
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+
+        <a href="#M000002">csv_to_array</a>&nbsp;&nbsp;
+
+        <a href="#M000006">desired_articles</a>&nbsp;&nbsp;
+
+        <a href="#M000007">desired_tag</a>&nbsp;&nbsp;
+
+        <a href="#M000004">disqus_comment_count_js</a>&nbsp;&nbsp;
+
+        <a href="#M000003">seo_friendly_title</a>&nbsp;&nbsp;
+
+        <a href="#M000005">short_url_bitly</a>&nbsp;&nbsp;
+
+        <a href="#M000001">tag_link_list</a>&nbsp;&nbsp;
+
+      </div>
+    </div>
+
+  </div>
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+    <!-- if method_list -->
+
+    <div id="methods">
+
+      <h3 class="section-bar">Public Class methods</h3>
+
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000002" class="method-signature">
+
+          <span class="method-name">csv_to_array</span><span class="method-args">(csv_string)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+processes a csv-string into an array
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/karakuri.rb, line 25</span>
+25:   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">csv_to_array</span>(<span class="ruby-identifier">csv_string</span>)
+26:       <span class="ruby-comment cmt">#split &amp; handle forgotten spaces after the separator. then flatten the multidemnsional array:</span>
+27:       <span class="ruby-identifier">csv_string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">', '</span>).<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">','</span>)}.<span class="ruby-identifier">flatten</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">csv_string</span>
+28:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000006" class="method-signature">
+
+          <span class="method-name">desired_articles</span><span class="method-args">(articles, tag)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+desired articles matching a corresponding tag
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/karakuri.rb, line 83</span>
+83:   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">desired_articles</span>(<span class="ruby-identifier">articles</span>, <span class="ruby-identifier">tag</span>)
+84:     <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">articles</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">tag</span>)
+85:       <span class="ruby-identifier">articles</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+86:         <span class="ruby-identifier">tags</span> = <span class="ruby-constant">Karakuri</span><span class="ruby-operator">::</span><span class="ruby-identifier">csv_to_array</span>(<span class="ruby-identifier">a</span>[<span class="ruby-identifier">:tags</span>])
+87:         <span class="ruby-identifier">tags</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">tag</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tags</span>
+88:       <span class="ruby-keyword kw">end</span>
+89:     <span class="ruby-keyword kw">end</span>
+90:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000007" class="method-signature">
+
+          <span class="method-name">desired_tag</span><span class="method-args">(query_string)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+extract desired tag from <tt>env[&quot;QUERY_STRING&quot;]</tt> or an
+equally formed expression, e.g. tag=<a
+href="Karakuri.html#M000007">desired_tag</a>
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/karakuri.rb, line 92</span>
+ 92:   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">desired_tag</span>(<span class="ruby-identifier">query_string</span>)
+ 93:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">query_string</span>
+ 94:       <span class="ruby-identifier">start</span> = <span class="ruby-identifier">query_string</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">&quot;tag=&quot;</span>)
+ 95:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">start</span>
+ 96:         <span class="ruby-identifier">start</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">3</span>
+ 97:         <span class="ruby-identifier">stop</span> = <span class="ruby-identifier">query_string</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">&quot;&amp;&quot;</span>)
+ 98:         <span class="ruby-identifier">stop</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">stop</span>
+ 99:         <span class="ruby-identifier">desired_tag</span> = <span class="ruby-identifier">query_string</span>[<span class="ruby-identifier">start</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">stop</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+100:         <span class="ruby-identifier">desired_tag</span> = <span class="ruby-constant">CGI</span><span class="ruby-operator">::</span><span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">desired_tag</span>)
+101:       <span class="ruby-keyword kw">else</span>
+102:         <span class="ruby-value str">''</span> <span class="ruby-comment cmt">#fallback: return empty string to prevent nil errors</span>
+103:       <span class="ruby-keyword kw">end</span>
+104:     <span class="ruby-keyword kw">end</span>
+105:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000004" class="method-signature">
+
+          <span class="method-name">disqus_comment_count_js</span><span class="method-args">(disqus_shortname)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Generates javascript to include to the bottom of your index page. Appending
+&#8216;disqus_thread&#8217; to the end of permalinks will replace the text
+of these links with the comment count.
+</p>
+<p>
+For example, you may have a link with this HTML: <tt>&amp;lt;a
+href=&amp;quot;<a
+href="http://example.com/my_article.html#disqus_thread&quot;&gt;Comments&lt;/a&gt">example.com/my_article.html#disqus_thread&quot;&gt;Comments&lt;/a&gt</a>;
+</tt> The comment count code will replace the text &#8220;Comments&#8221;
+with the number of comments on the page
+</p>
+<p>
+(see <a
+href="http://disqus.com/comments/universal/">disqus.com/comments/universal/</a>
+for details)
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/karakuri.rb, line 52</span>
+52:   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">disqus_comment_count_js</span>(<span class="ruby-identifier">disqus_shortname</span>)
+53:     <span class="ruby-node">%&amp;
+54:       &lt;script type=&quot;text/javascript&quot;&gt;
+55:       var disqus_shortname = '#{disqus_shortname}';
+56:       (function () {
+57:         var s = document.createElement('script'); s.async = true;
+58:         s.src = 'http://disqus.com/forums/#{disqus_shortname}/count.js';
+59:         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+60:       }());
+61:       &lt;/script&gt;
+62: 
+63:     &amp;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">disqus_shortname</span>
+64:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000003" class="method-signature">
+
+          <span class="method-name">seo_friendly_title</span><span class="method-args">(path, title, seo_ending)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+pass the path (@path for a toto blog) &amp; the desired SEO ending, e.g.
+the name of your blog. example for toto: <tt><a
+href="Karakuri.html#M000003">seo_friendly_title</a>(@path, title,
+&quot;mysite.com&quot;) will produce 'subpage | mysite.com' as seo friendly
+page title.</tt>
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/karakuri.rb, line 33</span>
+33:   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">seo_friendly_title</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">seo_ending</span>)
+34:     <span class="ruby-comment cmt">#TODO use custom title separator...</span>
+35:        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'index'</span>
+36:         <span class="ruby-identifier">page_title</span> = <span class="ruby-identifier">seo_ending</span>
+37:        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'/'</span>).<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
+38:         <span class="ruby-identifier">page_title</span> = <span class="ruby-identifier">title</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; | #{seo_ending}&quot;</span>
+39:        <span class="ruby-keyword kw">else</span>
+40:         <span class="ruby-identifier">page_title</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">capitalize</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[-]/</span>, <span class="ruby-value str">' '</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; | #{seo_ending}&quot;</span>
+41:       <span class="ruby-keyword kw">end</span>
+42:       <span class="ruby-identifier">page_title</span>
+43:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000005" class="method-signature">
+
+          <span class="method-name">short_url_bitly</span><span class="method-args">(url, login, api_key)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Retrieve bit.ly shortened url
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/karakuri.rb, line 68</span>
+68:   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">short_url_bitly</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">login</span>, <span class="ruby-identifier">api_key</span>)
+69:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">api_key</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">login</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;&quot;</span>
+70:       <span class="ruby-identifier">rest_call</span>=<span class="ruby-node">%{http://api.bit.ly/v3/shorten?login=#{login}&amp;apikey=#{api_key}&amp;longUrl=#{url}&amp;format=txt}</span>
+71:       <span class="ruby-keyword kw">begin</span>
+72:         <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-identifier">get</span>(<span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">rest_call</span>)) <span class="ruby-comment cmt"># handle http errors (esp. timeouts!)</span>
+73:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+74:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+75:       <span class="ruby-keyword kw">rescue</span>
+76:         <span class="ruby-identifier">url</span><span class="ruby-comment cmt">#in the case of a web service or HTTP error, we'll just ignore it &amp; return the long url</span>
+77:       <span class="ruby-keyword kw">end</span>
+78:     <span class="ruby-keyword kw">else</span>
+79:       <span class="ruby-identifier">url</span> <span class="ruby-comment cmt">#fallback: return long url if no proper login has been provided. TODO: check if a call w/o login is possible</span>
+80:     <span class="ruby-keyword kw">end</span>
+81:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000001" class="method-signature">
+
+          <span class="method-name">tag_link_list</span><span class="method-args">(csv_string)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+create a list of links to tagged articles, default link_format:
+<tt>%&amp;amp;&amp;lt;a href=&amp;quot;/tagged?tag=#{tag}&amp;quot;
+alt=&amp;quot;articles concerning #{tag}&amp;quot;
+&amp;gt;#{tag}&amp;lt;/a&amp;gt; &amp;amp;</tt>
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000001-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/karakuri.rb, line 12</span>
+12:   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Karakuri</span>.<span class="ruby-identifier">tag_link_list</span>(<span class="ruby-identifier">csv_string</span>)
+13:     <span class="ruby-comment cmt"># read csv-string into array</span>
+14:     <span class="ruby-identifier">tag_list</span> = <span class="ruby-identifier">csv_to_array</span>(<span class="ruby-identifier">csv_string</span>)
+15:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tag_list</span>
+16:       <span class="ruby-identifier">tag_string</span> = <span class="ruby-value str">&quot;&quot;</span>
+17:       <span class="ruby-comment cmt">#TODO pass a format via parameter</span>
+18:       <span class="ruby-identifier">tag_list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tag</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tag_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</span> }
+19:     <span class="ruby-keyword kw">end</span>
+20:     <span class="ruby-identifier">tag_string</span>
+21:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
