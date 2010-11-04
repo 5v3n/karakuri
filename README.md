@@ -2,7 +2,7 @@
 
 Having a closer look at ruby based blogging platforms like [serious](http://github.com/colszowka/serious) and [toto](http://cloudhead.io/toto), I missed some functionality.
 
-This a a collection of tools usable in both platforms. The project was formerly known as blog_helper, but Karakuri is a fra more suitable name & will be used from now on.
+This a a collection of tools usable in both platforms. The project was formerly known as blog_helper, but Karakuri is a far more suitable name & will be used from now on.
 
 ## Features
 

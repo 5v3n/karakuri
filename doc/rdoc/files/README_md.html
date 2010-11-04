@@ -53,7 +53,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>2010-10-21 00:36:02 +0200</td>
+      <td>2010-11-04 18:55:51 +0100</td>
     </tr>
     </table>
   </div>
@@ -76,7 +76,7 @@ missed some functionality.
 <p>
 This a a collection of tools usable in both platforms. The project was
 formerly known as blog_helper, but <a
-href="../classes/Karakuri.html">Karakuri</a> is a fra more suitable name
+href="../classes/Karakuri.html">Karakuri</a> is a far more suitable name
 &amp; will be used from now on.
 </p>
 <p>
@@ -128,7 +128,7 @@ layout.rhtml should be looking like this:
     &lt;!doctype html&gt;
     &lt;html&gt;
       &lt;head&gt;
-        &lt;% require 'blog_helper'
+        &lt;% require 'karakuri'
            page_title = Karakuri::seo_friendly_title(@path, title, 'yourSitesTitle.com')
         %&gt;
         &lt;title&gt;&lt;%=  page_title %&gt;&lt;/title&gt;
@@ -159,7 +159,7 @@ Next, you need a place to show the tag links, for example the index.rhtml:
 </p>
 <pre>
     &lt;section id=&quot;articles&quot;&gt;
-      &lt;% require 'blog_helper' %&gt;
+      &lt;% require 'karakuri' %&gt;
       &lt;% for article in articles[0...10] %&gt;
         &lt;article class=&quot;post&quot;&gt;
           &lt;header&gt;
@@ -182,7 +182,7 @@ that looks like this:
 </p>
 <pre>
     &lt;%
-     require 'blog_helper'
+     require 'karakuri'
      desired_tag = Karakuri::desired_tag(env[&quot;QUERY_STRING&quot;])
     %&gt;
     &lt;h1&gt;Posts filed under '&lt;%= desired_tag %&gt;': &lt;/h1&gt;
@@ -243,7 +243,9 @@ to.
 ### serious custom yaml field reader
 </p>
 <p>
-TBD&#8230; I have to refer to the source &amp; ri for now.
+I hacked serious&#8217; custom yaml field access (quite dirty hack) - but
+please refer to the source &amp; ri for that, I don&#8217;t use serious
+anymore.
 </p>
 
     </div>

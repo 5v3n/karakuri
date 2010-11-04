@@ -12,7 +12,7 @@ require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'karakuri'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.md', 'LICENSE']
   s.summary = 'Some handy helpers for toto and the likes...'
