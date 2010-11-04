@@ -30,7 +30,7 @@ For example, to use seo friendly titles, your layout.rhtml should be looking lik
     <!doctype html>
     <html>
       <head>
-        <% require 'blog_helper'
+        <% require 'karakuri'
            page_title = Karakuri::seo_friendly_title(@path, title, 'yourSitesTitle.com')
         %>
         <title><%=  page_title %></title>
@@ -55,7 +55,7 @@ To add a list of tags to your article, just use a custom yaml attribute:
 Next, you need a place to show the tag links, for example the index.rhtml:
 
     <section id="articles">
-      <% require 'blog_helper' %>
+      <% require 'karakuri' %>
       <% for article in articles[0...10] %>
         <article class="post">
           <header>
@@ -76,7 +76,7 @@ Create a page called `tagged.rhtml` in your `templates/pages` directory that loo
 
 
     <%
-     require 'blog_helper'
+     require 'karakuri'
      desired_tag = Karakuri::desired_tag(env["QUERY_STRING"])
     %>
     <h1>Posts filed under '<%= desired_tag %>': </h1>
@@ -119,4 +119,4 @@ Will result in the number of comments of the article the permalink posts to.
 
 ### serious custom yaml field reader
 
-TBD... I have to refer to the source & ri for now.
+I hacked serious' custom yaml field access (quite dirty hack) - but please refer to the source & ri for that, I don't use serious anymore.
