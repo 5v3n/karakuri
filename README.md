@@ -13,7 +13,7 @@ This a a collection of tools usable in both platforms. The project was formerly 
 
 ## Installation
 
-It's a piece of cake: just install the gem. Simply add `gem 'karakuri'` to your Gemfile or use `sudo gem install karakuri` to get going with the _Karakuri_
+It's a piece of cake: just install the gem. Simply add `gem 'karakuri'` to your Gemfile or use `sudo gem install karakuri` to get going.
 
 ## Usage
 
