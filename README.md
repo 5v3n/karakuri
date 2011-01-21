@@ -13,11 +13,7 @@ This a a collection of tools usable in both platforms. The project was formerly 
 
 ## Installation
 
-It's a piece of cake: just use the `gem` tool to get going with the _Karakuri_: `sudo gem install karakuri`
-
-If you want to use features that rely on accessing the http requests like the _tag_ feature, you'll need to use the [_toto_prerelease_](http://github.com/5v3n/toto).
-
-Please follow the instrucions there to do so.
+It's a piece of cake: just install the gem. Simply add `gem 'karakuri`` to your Gemfile or use the `gem` tool (`sudo gem install karakuri`) to get going with the _Karakuri_
 
 ## Usage
 
@@ -70,7 +66,7 @@ Next, you need a place to show the tag links, for example the index.rhtml:
 
 
 
-And again: piece of caked ;-). Now all we need to add is a page that displays articles belonging to a ceratin tag:
+And again: piece of cake ;-). Now all we need to add is a page that displays articles belonging to a ceratin tag:
 
 Create a page called `tagged.rhtml` in your `templates/pages` directory that looks like this:
 
