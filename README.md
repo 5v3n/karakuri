@@ -15,6 +15,8 @@ This a a collection of tools usable in both platforms. The project was formerly 
 
 It's a piece of cake: just install the gem. Simply add `gem 'karakuri'` to your Gemfile or use `sudo gem install karakuri` to get going.
 
+For a default karakuri powered toto template, check out [dorothy's sister karathy](https://github.com/5v3n/dorothy).
+
 ## Usage
 
 Piece of cake, again: all you have to do is use `<% require 'karakuri'%>` in your .rhtml or .erb file and call the corresponding methods.
