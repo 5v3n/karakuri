@@ -103,5 +103,29 @@ module Karakuri
       end
     end
   end
+
+  #
+  # Tag cloud, return a hash of tags and their frequency
+  #
+  def Karakuri.tag_cloud(articles)
+    tag_cloud = {}
+    if(articles)
+      articles.select do |a|
+        tags = csv_to_array(a[:tags])
+        if tags
+            tags.each { |tag| 
+                tag_string = %&<a href="/tagged?tag=#{tag}" alt="articles concerning #{tag}" >#{tag}</a>&
+                if tag_cloud.has_key? tag_string
+                    tag_cloud[tag_string] += 1
+                else
+                    tag_cloud[tag_string] = 1
+                end
+            }
+        end
+      end
+    end
+    tag_cloud
+  end
+
   
 end

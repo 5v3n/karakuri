@@ -90,6 +90,17 @@ Create a page called `tagged.rhtml` in your `templates/pages` directory that loo
 
 Now, you did most likely implement a tag listing on your toto blog. Congrats!
 
+### Tag Cloud
+
+Example usage:
+
+    <ul>
+        <li class="nav-header">Tags</li>
+        <%  Karakuri::tag_cloud(@articles).each do |tag, freq| %>
+            <% size = (10 * freq) %>
+            <li style="font-size:<%= size %>px"><%= tag %></li>
+        <% end %>
+    </ul>
 
 ### short url (via bit.ly)
 
