@@ -127,5 +127,5 @@ module Karakuri
     tag_cloud
   end
 
-  
 end
+
