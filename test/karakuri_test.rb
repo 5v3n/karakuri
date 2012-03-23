@@ -109,5 +109,73 @@ class KarakuriTest < Test::Unit::TestCase
     result = Karakuri::desired_articles(nil, nil)
     assert(result == nil, "Result expected to be nil, but was #{result}")
   end
+  def test_tag_cloud
+    #mock articles
+    article_01_mock = Hash.new()
+    article_02_mock = Hash.new()
+    article_03_mock = Hash.new()
+
+    article_01_mock[:title] = "article01"
+    article_01_mock[:tags] = STRING_01
+
+    article_02_mock[:title] = "article02"
+    article_02_mock[:tags] = STRING_02
+
+    article_03_mock[:title] = "article03"
+    article_03_mock[:tags] = STRING_03
+
+    articles = Array.new()
+    articles << article_01_mock << article_02_mock << article_03_mock
+
+    result = Karakuri::tag_cloud(articles)
+    assert(result != nil, "Result is expected to be not nil")
+
+    #test tags
+    tags = result.keys
+    expected_tags = [ '<a href="/tagged?tag=tag_1" alt="articles concerning tag_1" >tag_1</a>', '<a href="/tagged?tag=tag_2" alt="articles concerning tag_2" >tag_2</a>',
+                      '<a href="/tagged?tag=tag_3" alt="articles concerning tag_3" >tag_3</a>']
+
+    assert(tags != nil && tags - expected_tags == [], "Wrong extracted tags. Expected #{expected_tags}, but was #{tags}")
+
+    #test tag frequency
+    tag_1 = expected_tags[0]
+    tag1_exp_freq = 3
+
+    tag_2 = expected_tags[1]
+    tag2_exp_freq = 2
+
+    tag_3 = expected_tags[2]
+    tag3_exp_freq = 1
+
+    assert(result[tag_1] == tag1_exp_freq, "Frequency for tag 'tag_1' is wrong, expected #{tag1_exp_freq}, was #{result[tag_1]}")
+    assert(result[tag_2] == tag2_exp_freq, "Frequency for tag 'tag_2' is wrong, expected #{tag2_exp_freq}, was #{result[tag_2]}")
+    assert(result[tag_3] == tag3_exp_freq, "Frequency for tag 'tag_3' is wrong, expected #{tag3_exp_freq}, was #{result[tag_3]}")
+
+    #test for edge cases:
+
+    #passing in nil
+    result = Karakuri::tag_cloud(nil)
+    assert(result == {}, "Result is expected to be an empty hash, but was #{result}")
+
+    #pass in article with no tags
+    article_mock = Hash.new()
+    article_mock[:title] = "article"
+
+    articles = [article_mock]
+
+    result = Karakuri::tag_cloud(articles)
+    assert(result == {}, "Result is expected to be an empty hash, but was #{result}")
+
+    #pass in article with empty string as a tag
+    article_mock = Hash.new()
+    article_mock[:tags] = ""
+
+    articles = [article_mock]
+
+    result = Karakuri::tag_cloud(articles)
+    assert(result == {}, "Result is expected to be an empty hash, but was #{result}")
+
+  end
 
 end
+
