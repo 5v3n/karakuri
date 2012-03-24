@@ -95,10 +95,12 @@ Now, you did most likely implement a tag listing on your toto blog. Congrats!
 Example usage:
 
     <ul>
-        <li class="nav-header">Tags</li>
+        <li>Tags</li>
         <%  Karakuri::tag_cloud(@articles).each do |tag, freq| %>
             <% size = (10 * freq) %>
-            <li style="font-size:<%= size %>px"><%= tag %></li>
+            <li style="font-size:<%= size %>px">
+                <%= %|<a href="/tagged?tag=#{tag}" alt="articles concerning #{tag}" >#{tag}</a>| %>
+            </li>
         <% end %>
     </ul>
 

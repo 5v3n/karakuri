@@ -132,8 +132,7 @@ class KarakuriTest < Test::Unit::TestCase
 
     #test tags
     tags = result.keys
-    expected_tags = [ '<a href="/tagged?tag=tag_1" alt="articles concerning tag_1" >tag_1</a>', '<a href="/tagged?tag=tag_2" alt="articles concerning tag_2" >tag_2</a>',
-                      '<a href="/tagged?tag=tag_3" alt="articles concerning tag_3" >tag_3</a>']
+    expected_tags = %w[ tag_1 tag_2 tag_3]
 
     assert(tags != nil && tags - expected_tags == [], "Wrong extracted tags. Expected #{expected_tags}, but was #{tags}")
 
