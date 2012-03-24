@@ -111,8 +111,7 @@ module Karakuri
     tag_cloud = {}
     if(articles)
       articles.select do |article|
-        tags = csv_to_array(article[:tags])
-        if tags
+        if tags = csv_to_array(article[:tags])
           tags.each do |tag| 
             if tag_cloud.has_key? tag
               tag_cloud[tag] += 1
