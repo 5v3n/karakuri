@@ -98,6 +98,8 @@ Example usage:
     <%  Karakuri::tag_cloud(@articles).each do |tag, freq| %>
         <%= %|<a href="/tagged?tag=#{tag}" alt="articles concerning #{tag}" style="font-size: #{10 * freq}px">#{tag}</a>| %>
     <% end %>
+    
+Thanks [baopham](https://github.com/baopham) for the nice addition.
 
 ### short url (via bit.ly)
 
