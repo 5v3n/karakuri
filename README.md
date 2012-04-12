@@ -41,7 +41,7 @@ For example, to use seo friendly titles, your layout.rhtml should be looking lik
 
     require 'karakuri'
 
-    Karakuri.title_separator = '+'
+    Karakuri.title_separator '+'
 
 
 ### Tags
@@ -77,7 +77,7 @@ Next, you need a place to show the tag links, for example the index.rhtml:
 
     require 'karakuri'
 
-    Karakuri.link_format = '<a href="/tagged?tag={tag}" title="your customed title">{tag}</a> '
+    Karakuri.link_format '<a href="/tagged?tag={tag}" title="your customed title">{tag}</a> '
 
 `{tag}` (keep it as it is in your `config.ru`) will be the placeholder for your tag corresponding to each article and is required.
 
