@@ -17,7 +17,7 @@
     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tag_list</span>
       <span class="ruby-identifier">tag_string</span> = <span class="ruby-value str">&quot;&quot;</span>
       <span class="ruby-comment cmt">#TODO pass a format via parameter</span>
-      <span class="ruby-identifier">tag_list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tag</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tag_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</span> }
+      <span class="ruby-identifier">tag_list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tag</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tag_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; title=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</span> }
     <span class="ruby-keyword kw">end</span>
     <span class="ruby-identifier">tag_string</span>
   <span class="ruby-keyword kw">end</span></pre>

@@ -190,7 +190,7 @@ that looks like this:
 
     &lt;% Karakuri::desired_articles(@articles, desired_tag).each do |article| %&gt;
       &lt;li&gt;
-        &lt;span class=&quot;descr&quot;&gt;&lt;a href=&quot;&lt;%= article.path %&gt;&quot; alt=&quot;&lt;%= article.title %&gt;&quot;&gt;&lt;%= article.title %&gt;&lt;/a&gt;&lt;br/&gt;&lt;/span&gt;
+        &lt;span class=&quot;descr&quot;&gt;&lt;a href=&quot;&lt;%= article.path %&gt;&quot; title=&quot;&lt;%= article.title %&gt;&quot;&gt;&lt;%= article.title %&gt;&lt;/a&gt;&lt;br/&gt;&lt;/span&gt;
       &lt;/li&gt;
     &lt;% end %&gt;
     &lt;/ul&gt;
