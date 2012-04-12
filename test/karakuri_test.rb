@@ -44,13 +44,13 @@ class KarakuriTest < Test::Unit::TestCase
     result_01 = Karakuri::tag_link_list(STRING_01)
     assert("Unexpected mapping for #{STRING_01}!", result_01 == "<a href=/tagged?tag=tag_1 >tag_1</a> ")
     result_02 = Karakuri::tag_link_list(STRING_02)
-    expected_result_02 = %{<a href="/tagged?tag=tag_1" alt="articles concerning tag_1" >tag_1</a> <a href="/tagged?tag=tag_2" alt="articles concerning tag_2" >tag_2</a> }
+    expected_result_02 = %{<a href="/tagged?tag=tag_1" title="articles concerning tag_1">tag_1</a> <a href="/tagged?tag=tag_2" title="articles concerning tag_2">tag_2</a> }
     assert(result_02 == expected_result_02, "Unexpected mapping for #{STRING_02}!")
     result_03 = Karakuri::tag_link_list(STRING_03)
-    expected_result_03 = %{<a href="/tagged?tag=tag_1" alt="articles concerning tag_1" >tag_1</a> <a href="/tagged?tag=tag_2" alt="articles concerning tag_2" >tag_2</a> <a href="/tagged?tag=tag_3" alt="articles concerning tag_3" >tag_3</a> }
+    expected_result_03 = %{<a href="/tagged?tag=tag_1" title="articles concerning tag_1">tag_1</a> <a href="/tagged?tag=tag_2" title="articles concerning tag_2">tag_2</a> <a href="/tagged?tag=tag_3" title="articles concerning tag_3">tag_3</a> }
     assert(result_03 == expected_result_03, "Unexpected mapping for #{STRING_03}!")
     result_04 = Karakuri::tag_link_list(STRING_04)
-    expected_result_04 = %{<a href="/tagged?tag=hacks" alt="articles concerning hacks" >hacks</a> <a href="/tagged?tag=love" alt="articles concerning love" >love</a> <a href="/tagged?tag=rock 'n' roll" alt="articles concerning rock 'n' roll" >rock 'n' roll</a> }
+    expected_result_04 = %{<a href="/tagged?tag=hacks" title="articles concerning hacks">hacks</a> <a href="/tagged?tag=love" title="articles concerning love">love</a> <a href="/tagged?tag=rock 'n' roll" title="articles concerning rock 'n' roll">rock 'n' roll</a> }
     assert(result_04 == expected_result_04, "Unexpected mapping for #{STRING_04}!")
   end
   def test_short_url_bitly
@@ -204,6 +204,9 @@ class KarakuriTest < Test::Unit::TestCase
     result_02 = Karakuri::tag_link_list(article_02_mock[:tags])
     expected_02 =  '<a href="/tag_1">tag_1</a><a href="/tag_2">tag_2</a>'
     assert(result_02 == expected_02, "Link for tag is wrong, expected #{expected_02}, was #{result_02}")
+
+    # Reset to default for other tests
+    Karakuri.link_format '<a href="/tagged?tag={tag}" title="articles concerning {tag}">{tag}</a> '
   end
 
   def test_title_separator
@@ -220,6 +223,9 @@ class KarakuriTest < Test::Unit::TestCase
     result = Karakuri::seo_friendly_title(path, 'test', 'Karakuri')
     expected = "Example + Karakuri"
     assert(result == expected, "Page title is wrong, expected #{expected}, was #{result}")
+
+    # Reset to default for other tests
+    Karakuri.title_separator '|'
   end
 
 end
