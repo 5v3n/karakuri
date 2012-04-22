@@ -6,6 +6,16 @@ require 'uri'
 # Some useful feature for toto and the likes. Basically, any ruby based blog or site.
 #
 module Karakuri
+  @link_format = '<a href="/tagged?tag={tag}" alt="articles concerning {tag}" >{tag}</a> '
+  @title_separator = '|'
+
+  def self.link_format(format)
+    @link_format = format
+  end
+
+  def self.title_separator(separator)
+    @title_separator = separator
+  end
   #
   # create a list of links to tagged articles, default link_format: <code>%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</code>
   #
@@ -14,8 +24,7 @@ module Karakuri
     tag_list = csv_to_array(csv_string)
     if tag_list
       tag_string = ""
-      #TODO pass a format via parameter
-      tag_list.each { |tag| tag_string << %&<a href="/tagged?tag=#{tag}" alt="articles concerning #{tag}" >#{tag}</a> & }
+      tag_list.each { |tag| tag_string << @link_format.gsub('{tag}', tag) }
     end
     tag_string
   end
@@ -31,13 +40,12 @@ module Karakuri
   # example for toto: <code>seo_friendly_title(@path, title, "mysite.com") will produce 'subpage | mysite.com' as seo friendly page title.</code>
   #
   def Karakuri.seo_friendly_title(path, title, seo_ending)
-    #TODO use custom title separator...
        if path == 'index'
         page_title = seo_ending
        elsif path.split('/').compact.length == 4
-        page_title = title << " | #{seo_ending}"
+        page_title = title << " #{@title_separator} #{seo_ending}"
        else
-        page_title = path.capitalize.gsub(/[-]/, ' ') << " | #{seo_ending}"
+        page_title = path.capitalize.gsub(/[-]/, ' ') << " #{@title_separator} #{seo_ending}"
       end
       page_title
   end
