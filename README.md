@@ -37,6 +37,13 @@ For example, to use seo friendly titles, your layout.rhtml should be looking lik
     .
     .
 
+**TIPS**: To have a customized title separator, put this in your `config.ru`
+
+    require 'karakuri'
+
+    Karakuri.title_separator '-'
+
+
 ### Tags
 Adding the tagging feature requires the _toto_prerelease_ as mentioned above, since we need the http request to apply our little hack.
 
@@ -66,9 +73,16 @@ Next, you need a place to show the tag links, for example the index.rhtml:
     .
     .
 
+**TIPS**: Again, to customize your tag link format, put this in your `config.ru`:
+
+    require 'karakuri'
+
+    Karakuri.link_format '<a href="/tagged?tag={tag}" title="your customed title">{tag}</a> '
+
+`{tag}` (keep it as it is in your `config.ru`) will be the placeholder for the tag corresponding to each article and it is required.
 
 
-And again: piece of cake ;-). Now all we need to add is a page that displays articles belonging to a ceratin tag:
+And again: piece of cake ;-). Now all we need to add is a page that displays articles belonging to a certain tag:
 
 Create a page called `tagged.rhtml` in your `templates/pages` directory that looks like this:
 
@@ -103,7 +117,7 @@ Thanks [baopham](https://github.com/baopham) for the nice addition.
 
 ### short url (via bit.ly)
 
-To use a bit.ly shortened URL, just call the followin function inside a .rhtml file:
+To use a bit.ly shortened URL, just call the following function inside a .rhtml file:
 
     <%= Karakuri::short_url_bitly(<url>, <bit.ly login name>, <bit.ly api key>) %>
 
