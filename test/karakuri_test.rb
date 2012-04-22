@@ -176,5 +176,57 @@ class KarakuriTest < Test::Unit::TestCase
 
   end
 
+  def test_link_format
+    #mock articles
+    article_01_mock = Hash.new()
+    article_02_mock = Hash.new()
+
+    article_01_mock[:tags] = STRING_01
+
+    article_02_mock[:tags] = STRING_02
+
+    # Test the default link format
+    result_01 = Karakuri::tag_link_list(article_01_mock[:tags])
+    expected_01 = "<a href=\"/tagged?tag=#{STRING_01}\" alt=\"articles concerning #{STRING_01}\" >#{STRING_01}</a> "
+    assert(result_01 == expected_01 , "Link for tag is wrong, expected #{expected_01}, was #{result_01}")
+
+    result_02 = Karakuri::tag_link_list(article_02_mock[:tags])
+    expected_02 = '<a href="/tagged?tag=tag_1" alt="articles concerning tag_1" >tag_1</a> <a href="/tagged?tag=tag_2" alt="articles concerning tag_2" >tag_2</a> '
+    assert(result_02 == expected_02, "Link for tag is wrong, expected #{expected_02}, was #{result_02}")
+
+    # Test customed link format
+    Karakuri.link_format '<a href="/{tag}">{tag}</a>'
+
+    result_01 = Karakuri::tag_link_list(article_01_mock[:tags])
+    expected_01 = "<a href=\"/#{STRING_01}\">#{STRING_01}</a>"
+    assert(result_01 == expected_01 , "Link for tag is wrong, expected #{expected_01}, was #{result_01}")
+
+    result_02 = Karakuri::tag_link_list(article_02_mock[:tags])
+    expected_02 = '<a href="/tag_1">tag_1</a><a href="/tag_2">tag_2</a>'
+    assert(result_02 == expected_02, "Link for tag is wrong, expected #{expected_02}, was #{result_02}")
+
+    # Reset to default for other tests
+    Karakuri.link_format '<a href="/tagged?tag={tag}" alt="articles concerning {tag}" >{tag}</a> '
+  end
+
+  def test_title_separator
+    # Test the default title separator '|'
+    path = 'example'
+    title = 'test'
+    seo_ending = 'Karakuri'
+    result = Karakuri::seo_friendly_title(path, title, seo_ending)
+    expected = "Example | Karakuri"
+    assert(result == expected, "Page title is wrong, expected #{expected}, was #{result}")
+
+    # Test customed title separator '-'
+    Karakuri.title_separator '-'
+    result = Karakuri::seo_friendly_title(path, 'test', 'Karakuri')
+    expected = "Example - Karakuri"
+    assert(result == expected, "Page title is wrong, expected #{expected}, was #{result}")
+
+    # Reset to default for other tests
+    Karakuri.title_separator '|'
+  end  
+
 end
 
