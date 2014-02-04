@@ -7,7 +7,7 @@ require 'uri'
 #
 module Karakuri
   #
-  # create a list of links to tagged articles, default link_format: <code>%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</code>
+  # create a list of links to tagged articles, default link_format: <code>%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; title=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</code>
   #
   def Karakuri.tag_link_list(csv_string)
     # read csv-string into array
@@ -15,7 +15,7 @@ module Karakuri
     if tag_list
       tag_string = ""
       #TODO pass a format via parameter
-      tag_list.each { |tag| tag_string << %&<a href="/tagged?tag=#{tag}" alt="articles concerning #{tag}" >#{tag}</a> & }
+      tag_list.each { |tag| tag_string << %&<a href="/tagged?tag=#{tag}" title="articles concerning #{tag}" >#{tag}</a> & }
     end
     tag_string
   end

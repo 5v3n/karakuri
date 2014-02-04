@@ -96,7 +96,7 @@ Example usage:
 
     <h1>Tags</h1>
     <%  Karakuri::tag_cloud(@articles).each do |tag, freq| %>
-        <%= %|<a href="/tagged?tag=#{tag}" alt="articles concerning #{tag}" style="font-size: #{10 * freq}px">#{tag}</a>| %>
+        <%= %|<a href="/tagged?tag=#{tag}" title="articles concerning #{tag}" style="font-size: #{10 * freq}px">#{tag}</a>| %>
     <% end %>
     
 Thanks [baopham](https://github.com/baopham) for the nice addition.

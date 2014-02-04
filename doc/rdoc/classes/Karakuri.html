@@ -411,7 +411,7 @@ Retrieve bit.ly shortened url
           <p>
 create a list of links to tagged articles, default link_format:
 <tt>%&amp;amp;&amp;lt;a href=&amp;quot;/tagged?tag=#{tag}&amp;quot;
-alt=&amp;quot;articles concerning #{tag}&amp;quot;
+title=&amp;quot;articles concerning #{tag}&amp;quot;
 &amp;gt;#{tag}&amp;lt;/a&amp;gt; &amp;amp;</tt>
 </p>
 
@@ -426,7 +426,7 @@ alt=&amp;quot;articles concerning #{tag}&amp;quot;
 15:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tag_list</span>
 16:       <span class="ruby-identifier">tag_string</span> = <span class="ruby-value str">&quot;&quot;</span>
 17:       <span class="ruby-comment cmt">#TODO pass a format via parameter</span>
-18:       <span class="ruby-identifier">tag_list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tag</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tag_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; alt=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</span> }
+18:       <span class="ruby-identifier">tag_list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tag</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tag_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%&amp;&lt;a href=&quot;/tagged?tag=#{tag}&quot; title=&quot;articles concerning #{tag}&quot; &gt;#{tag}&lt;/a&gt; &amp;</span> }
 19:     <span class="ruby-keyword kw">end</span>
 20:     <span class="ruby-identifier">tag_string</span>
 21:   <span class="ruby-keyword kw">end</span>
